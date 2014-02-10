@@ -61,4 +61,48 @@ public class Etat {
 			return (id == other.id);
 		}
 	}
+
+	/**2) Implémentation des automates**/
+
+	/* Question 1 */
+	public EnsEtat succ(char c){
+		return transitions.get(c);
+	}
+
+	public EnsEtat succ(){
+		EnsEtat e = new EnsEtat();
+		for(char c : transitions.keySet()){
+			e.addAll(this.succ(c));
+		}
+		return e;
+	}
+
+	/* Question 2*/
+
+	void ajouteTransition(char c, Etat e){
+		EnsEtat tmp = transitions.get(c);
+		if(tmp == null){
+			tmp = new EnsEtat();
+			tmp.add(e);
+			transitions.put(c,tmp);
+		}
+		else {
+			tmp.add(e);
+			transitions.put(c,tmp);
+		}
+	}
+
+	public String toString(){
+		String s = "initial :"+  this.init+"\n";
+		if(this.term)s+= "terminal";
+		for(char  key : transitions.keySet()){
+			s+=key+" -> ";
+			s+=transitions.get(key).toString();
+
+			s+="\n";
+		}
+	return s;
+	}
+
+
 }
