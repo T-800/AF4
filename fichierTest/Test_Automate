@@ -4,11 +4,11 @@
 b 3
 
 3 terminal
-a 0
+a 4
 
-0 initial
+4 initial
 b 3
 a 1 2
 
 1 terminal
-b 0
+b 4

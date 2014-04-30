@@ -10,22 +10,22 @@ public class Etat {
 	int id;
 
 	 public String toString() {
-	        String str = "" + this.id;
-	        if (this.isInit()) {
-	            str += " initial";
-	        }
-	        if (this.isTerm()) {
-	            str += " terminal";
-	        }
-	        str += "\n";
-	        for (char c : transitions.keySet()) {
-	            str+=c;
-	            for (Etat e : transitions.get(c)) {
-	                str+=" "+e.id;
-	            }
-	            str+="\n";
-	        }
-	        return str;
+         String str = "" + this.id;
+         if (this.isInit()) {
+             str += " initial";
+         }
+         if (this.isTerm()) {
+             str += " terminal";
+         }
+         str += "\n";
+         for (char c : transitions.keySet()) {
+             str+=c;
+             for (Etat e : transitions.get(c)) {
+                 str+=" "+e.id;
+             }
+             str+="\n";
+         }
+         return str;
 	}
 	
 	public String singleString(){
