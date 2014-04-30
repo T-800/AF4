@@ -10,3 +10,14 @@
 .tags
 .idea
 out
+
+# Eclipse
+.classpath
+.project
+.settings/
+
+# Intellij
+.idea/
+*.iml
+*.iws
+out/

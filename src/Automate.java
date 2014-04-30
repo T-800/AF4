@@ -222,9 +222,6 @@ public class Automate extends EnsEtat {
         
         int nb = sc.nextInt();
         HashMap<Integer,Etat> set = new HashMap<Integer,Etat>();
-        /*for(int i =0;i<nb;i++){
-            set.put(i,new Etat(i));
-        }*/
         sc.nextLine();
         sc.nextLine();
 
@@ -233,30 +230,22 @@ public class Automate extends EnsEtat {
             String[] nombre = str.split(" ",2);
             int NumeroEtat = Integer.parseInt(nombre[0]);
             System.out.println(NumeroEtat);
-            if(str.contains("initial")){
-                Etat e = set.get(NumeroEtat);
-                if (e == null) set.put(NumeroEtat,new Etat(NumeroEtat));
-                set.get(NumeroEtat).setInit(true);
-            }
-            if(str.contains("terminal")){
-
-                Etat e = set.get(NumeroEtat);
-                if (e == null) set.put(NumeroEtat,new Etat(NumeroEtat));
-                set.get(NumeroEtat).setTerm(true);
-            }
+            Etat e = set.get(NumeroEtat);
+            if (e == null) set.put(NumeroEtat,new Etat(NumeroEtat));
+            if(str.contains("initial"))set.get(NumeroEtat).setInit(true);
+            if(str.contains("terminal"))set.get(NumeroEtat).setTerm(true);
             while(!str.equals("") &&  sc.hasNextLine()){
                 str = sc.nextLine();
                 String [] tab= str.split(" ");
                 for(int j =1;j<tab.length;j++){
-                    Etat e = set.get(Integer.parseInt(tab[j]));
-                    if (e == null) set.put(Integer.parseInt(tab[j]),new Etat(Integer.parseInt(tab[j])));
+                    Etat ee = set.get(Integer.parseInt(tab[j]));
+                    if (ee == null) set.put(Integer.parseInt(tab[j]),new Etat(Integer.parseInt(tab[j])));
                     set.get(NumeroEtat).ajouteTransition(tab[0].charAt(0),set.get(Integer.parseInt(tab[j])));
 
                 }
             }
-            //System.out.println(set.get(i).toString());
         }
-        System.out.println(set.size());
+        System.out.println("azetyh");
         for(Etat e : set.values()){
             this.ajouteEtatSeul(e);
         }
