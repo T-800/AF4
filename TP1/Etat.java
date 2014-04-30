@@ -1,108 +1,110 @@
-
 import java.util.HashMap;
 import java.util.Set;
 
 public class Etat {
 
-	HashMap<Character, EnsEtat> transitions;
-	boolean init;
-	boolean term;
-	int id;
+    HashMap<Character, EnsEtat> transitions;
+    boolean init;
+    boolean term;
+    int id;
 
-	public Etat() {
-		this.transitions = new HashMap<Character, EnsEtat>();
-	}
+    public Etat() {
+        this.transitions = new HashMap<Character, EnsEtat>();
+    }
 
-	public Etat(int id) {
-		this.transitions = new HashMap<Character, EnsEtat>();
-		this.id = id;
-	}
+    public Etat(int id) {
+        this.transitions = new HashMap<Character, EnsEtat>();
+        this.id = id;
+    }
 
-	public Etat(boolean init, boolean term, int id) {
-		this.transitions = new HashMap<Character, EnsEtat>();
-		this.init = init;
-		this.term = term;
-		this.id = id;
-	}
+    public Etat(boolean init, boolean term, int id) {
+        this.transitions = new HashMap<Character, EnsEtat>();
+        this.init = init;
+        this.term = term;
+        this.id = id;
+    }
 
-	public Etat(boolean estInit, boolean estTerm) {
-		this.init = estInit;
-		this.term = estTerm;
-		this.transitions = new HashMap<Character, EnsEtat>();
-	}
+    public Etat(boolean estInit, boolean estTerm) {
+        this.init = estInit;
+        this.term = estTerm;
+        this.transitions = new HashMap<Character, EnsEtat>();
+    }
 
-	public boolean isInit() {
-		return init;
-	}
+    public boolean isInit() {
+        return init;
+    }
 
-	public boolean isTerm() {
-		return term;
-	}
+    public boolean isTerm() {
+        return term;
+    }
 
-	public void setInit(boolean init) {
-		this.init = init;
-	}
+    public void setInit(boolean init) {
+        this.init = init;
+    }
 
-	public void setTerm(boolean term) {
-		this.term = term;
-	}
+    public void setTerm(boolean term) {
+        this.term = term;
+    }
 
-	@Override
-	public int hashCode() {
-		return id;
-	}
+    @Override
+    public int hashCode() {
+        return id;
+    }
 
-	@Override
-	public boolean equals(Object obj) {
-		if (obj == null || getClass() != obj.getClass()) {
-			return false;
-		} else {
-			final Etat other = (Etat) obj;
-			return (id == other.id);
-		}
-	}
+    public int getId() {
+        return this.id;
+    }
 
-	/**2) Implémentation des automates**/
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null || getClass() != obj.getClass()) {
+            return false;
+        } else {
+            final Etat other = (Etat) obj;
+            return (id == other.id);
+        }
+    }
 
-	/* Question 1 */
-	public EnsEtat succ(char c){
-		return transitions.get(c);
-	}
+    public EnsEtat succ(char c) {
+        return transitions.get(c);
+    }
 
-	public EnsEtat succ(){
-		EnsEtat e = new EnsEtat();
-		for(char c : transitions.keySet()){
-			e.addAll(this.succ(c));
-		}
-		return e;
-	}
+    public EnsEtat succ() {
 
-	/* Question 2*/
+        EnsEtat l = new EnsEtat();
+        for (char c : transitions.keySet()) {
+            l.addAll(this.succ(c));
+        }
+        return l;
+    }
 
-	void ajouteTransition(char c, Etat e){
-		EnsEtat tmp = transitions.get(c);
-		if(tmp == null){
-			tmp = new EnsEtat();
-			tmp.add(e);
-			transitions.put(c,tmp);
-		}
-		else {
-			tmp.add(e);
-			transitions.put(c,tmp);
-		}
-	}
+    void ajouteTransition(char c, Etat e) {
+        if (transitions.containsKey(c)) {
+            transitions.get(c).add(e);
+        } else {
+            EnsEtat ee = new EnsEtat();
+            ee.add(e);
+            transitions.put(c, ee);
+        }
+    }
 
-	public String toString(){
-		String s = "initial :"+  this.init+"\n";
-		if(this.term)s+= "terminal";
-		for(char  key : transitions.keySet()){
-			s+=key+" -> ";
-			s+=transitions.get(key).toString();
+    public String toString() {
+        String s = "initial : " + this.isInit() + "\n";
+        s += "terminal : " + this.isTerm() + "\n";
+        s += "id : " + this.id + "\n";
+        for (char c : transitions.keySet()) {
+            for (Etat e : transitions.get(c)) {
+                s += c + " : " + e.id + "\n";
+            }
+        }
+        return s;
+    }
+    public Set<Character> alphabet(){
+        return this.transitions.keySet();
+    }
 
-			s+="\n";
-		}
-	return s;
-	}
-
+    public Etat copie(){
+        return new Etat(this.init,this.term, this.id);
+    }
 
 }
