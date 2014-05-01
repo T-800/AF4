@@ -1,8 +1,4 @@
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
-import java.util.Stack;
+import java.util.*;
 
 abstract class Arbre{ 
 	Character symbole;
@@ -64,10 +60,17 @@ abstract class Arbre{
 	public boolean egaliteArbre(Arbre arbre){
 		Residuel resi1 = new Residuel();
 		Residuel resi2 = new Residuel();
-		Automate auto1 = resi1.miniResiduel(this);
-		Automate auto2 = resi2.miniResiduel(arbre);
+		Automate auto1 = resi1.residuelExpression(this);
+		Automate auto2 = resi2.residuelExpression(arbre);
 		return auto1.egaliteMini(auto2);
 		
 	}
-	
+
+    public Set<Character> alphabet(){
+        Set<Character> resultat = new HashSet<Character>();
+        for (Feuille f :this.succ().keySet()){
+            resultat.add(f.symbole);
+        }
+        return resultat;
+    }
 }

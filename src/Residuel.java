@@ -1,38 +1,37 @@
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Stack;
+import java.util.*;
 
 public class Residuel {
 
 	private Arbre language;
 	private Map<Arbre, Etat> map = new HashMap<Arbre, Etat>();
-	private Stack<Couple> tmp = new Stack<Couple>();
+    private Queue<Couple> tmp = new LinkedList<Couple>();
 	
 	
-	public Automate miniResiduel(Arbre language){
-		Etat init = new Etat(true,language.contientMotVide,0);
-		this.language = language;
-		this.map.put(language,init);
-		this.residuelAutomate(language, init);
-		Automate auto2 = new Automate();
-		auto2.ajouteEtatRecursif(init);
-		return auto2;
+	public Automate residuelExpression(Arbre arbreExpr){
+        System.out.println("Expression rationnelle :"+arbreExpr+"\n");
+		Etat initial = new Etat(true,arbreExpr.contientMotVide,0); // construction de l'état Initial
+		this.language = arbreExpr;
+		this.map.put(arbreExpr,initial);
+		this.residueRecursif(arbreExpr, initial,"");
+		Automate automate = new Automate();
+		automate.ajouteEtatRecursif(initial);
+		return automate;
 	}
 	
-	public void residuelAutomate(Arbre arbre,Etat etat){
+	public void residueRecursif(Arbre arbre, Etat etat, String last){
+        Set<Character> resultat = new HashSet<Character>();
+        char[] lettres = new char[arbre.alphabet().size()];
 
-		char[] lettres = new char[arbre.succ().keySet().size()];
 		int i = 0;
-		for (Feuille f :arbre.succ().keySet()){
-			lettres[i++]=f.symbole;	
+		for (Character c :arbre.alphabet()){
+			lettres[i++]=c;
 		}
+        Arrays.sort(lettres);
 		for(char l : lettres){
 			Arbre arbreR=arbre.residuel(l,language);
-			//System.out.println("("+l+" -1) "+arbre.toString()+" = "+arbreR.toString());
+            System.out.println("("+last+l+"¯¹) "+arbre.toString()+" = "+arbreR.toString());
 			boolean empile= true;
 			for(Arbre a : this.map.keySet()){
-				//System.out.println(a.toString().equals(arbreR.toString()));
 				if(a.toString().equals(arbreR.toString())&&(((a.contient1||a.contientMotVide)&&(arbreR.contient1||arbreR.contientMotVide))||((!a.contientMotVide&&!a.contient1)&&(!arbreR.contient1&&!arbreR.contientMotVide)))){
 					etat.ajouteTransition(l,map.get(a));
 					empile=false;
@@ -44,22 +43,24 @@ public class Residuel {
 				Etat e = new Etat(false,arbreR.contientMotVide||arbreR.contient1,map.size());
 				etat.ajouteTransition(l,e);
 				map.put(arbreR, e);
-				if(arbreR.symbole!='1')tmp.push(new Couple(arbreR,e));
+                if(arbreR.symbole!='1')tmp.add(new Couple(arbreR, e,last+l));
 			}
 		}
-		if(!tmp.empty()){
-			Couple c = tmp.pop();
-			residuelAutomate(c.a, c.e);
+        if(!tmp.isEmpty()){
+            Couple c = tmp.remove();
+			residueRecursif(c.a, c.e,c.l);
 		}
 	}
 
     class Couple{
         Arbre a;
         Etat e;
+        String l;
 
-        public Couple(Arbre a, Etat e) {
+        public Couple(Arbre a, Etat e, String l) {
             this.a=a;
             this.e=e;
+            this.l= l;
         }
     }
 }

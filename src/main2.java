@@ -22,7 +22,7 @@ public class main2 {
 		/*
 		Etat init = new Etat(true,test.contientMotVide,0);
 		residuel.map.put(test,init);
-		residuel.residuelAutomate(test, init);
+		residuel.residueRecursif(test, init);
 		Automate auto2 = new Automate();
 		auto2.ajouteEtatRecursif(init);
 		System.out.println(auto2.determinise());
@@ -64,8 +64,9 @@ public class main2 {
                     clear();
                     System.out.println("expression régulière");
                     System.out.print("Entrer une expression régulière : ");
-                    String pos = sc.next();
-                    Menu_Regex(pos);
+                    //String pos = sc.next();
+                    //Menu_Regex(pos);
+                    Menu_Regex("baa.*.ba..bb.*.b.");
                     break;
                 case 0:
                     System.exit(0);
@@ -157,12 +158,14 @@ public class main2 {
         int main = -1;
         Scanner sc = new Scanner(System.in);
         Arbre a;
+        a = Arbre.lirePostfixe(s);
         boolean auto = false;
         Automate automate = null;
         do{
 
-            System.out.println("Votre expression rationnelle est :"+s);
-            System.out.println("MENU expression rationnelle");
+
+            System.out.println("MENU EXPRESSION RATIONNELLE");
+            System.out.println("Votre expression rationnelle est :"+a);
             System.out.println();
             System.out.println("1 : Glushkov");
             System.out.println("2 : Résiduels");
@@ -176,7 +179,7 @@ public class main2 {
                     System.out.println("~~~~~~~~~~~~~~");
                     System.out.println("|  GLUSHKOV  |");
                     System.out.println("~~~~~~~~~~~~~~");
-                    a = Arbre.lirePostfixe(s);
+
                     automate = a.toAutomate();
                     auto = true;
                     main = 0;
@@ -187,11 +190,8 @@ public class main2 {
                     System.out.println("~~~~~~~~~~~~~~");
                     System.out.println("|  RÉSIDUEL  |");
                     System.out.println("~~~~~~~~~~~~~~");
-                    a = Arbre.lirePostfixe(s);
-                    System.out.println(a);
-
                     Residuel resi1 = new Residuel();
-                    automate = resi1.miniResiduel(a);
+                    automate = resi1.residuelExpression(a);
                     auto = true;
                     main = 0;
 

@@ -38,7 +38,6 @@ class Feuille extends Arbre{
 
 	@Override
 	Arbre simplification(Arbre language) {
-		// TODO Auto-generated method stub
 		return this;
 	}
 	

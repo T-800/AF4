@@ -10,7 +10,7 @@ public class main {
 		Moore moore = new Moore();
 		auto2 = moore.miniMoore(auto2);
 		Residuel resi1 = new Residuel();
-		Automate auto1 = resi1.miniResiduel(test1);
+		Automate auto1 = resi1.residuelExpression(test1);
 		System.out.println(auto1.egaliteMini(auto2));
 		//System.out.println(auto2);
 		//System.out.println(auto1);

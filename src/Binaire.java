@@ -6,7 +6,9 @@ import java.util.Set;
 class Binaire extends Arbre{ 
 	
 	public String toString() {
-        return ("(" + gauche.toString() + this.symbole + droit.toString() + ")");
+        if (this.symbole == '+')return ('('+gauche.toString() + this.symbole + droit.toString()+')');
+        return (gauche.toString()+droit.toString());
+
     }
 	
 	public Binaire(Arbre gauche, Arbre droit, char s) {
@@ -46,15 +48,12 @@ class Binaire extends Arbre{
 		Arbre arbre = new Feuille('0');
 		if(this.symbole=='.'){
 			Arbre arbre1 = new Binaire(gauche.residuel(c,language),droit,'.');
-			//System.out.println(arbre+":"+new Binaire(gauche.residuel(c),droit,'.').simplification());
 			if(gauche.contientMotVide||gauche.contient1){
 				arbre1= new Binaire(arbre1.simplification(language),droit.residuel(c,language),'+');
 			}
-			//System.out.println(arbre1);
 			return arbre1.simplification(language);
 		}
 		else if(this.symbole=='+'){
-			//System.out.println(this+"//"+c+":"+new Binaire(gauche.residuel(c,language),droit.residuel(c,language),'+'));
 			return new Binaire(gauche.residuel(c,language),droit.residuel(c,language),'+').simplification(language);
 		}
 		return arbre;
@@ -100,11 +99,11 @@ class Binaire extends Arbre{
 			else if(droit.symbole == '1') return gauche.simplification(language);
 			else if(gauche.contient1){
 				gauche.contient1=false;
-				return new Binaire(this,droit,'+').simplification(language);
+                if(!gauche.contientMotVide)return new Binaire(this,droit,'+').simplification(language);
 			}
 			else if(droit.contient1){
 				droit.contient1=false;
-				return new Binaire(this,gauche,'+').simplification(language);
+                if(!droit.contientMotVide)return new Binaire(this,gauche,'+').simplification(language);
 			}
 		}
 		if(language != null){

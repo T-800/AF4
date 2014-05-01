@@ -5,6 +5,7 @@ import java.util.Set;
 class Unaire extends Arbre{
 	
 	public String toString() {
+        if(this.fils instanceof Feuille)return (fils.toString()+ this.symbole);
         return ("(" + fils.toString() + ")" + this.symbole);
     }
 	
