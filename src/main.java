@@ -5,7 +5,8 @@ public class main {
 		
 		Arbre test1 = Arbre.lirePostfixe("abab.+*.b*abb.+.+");
 		System.out.println(test1);
-		Automate auto2 = test1.toAutomate();
+
+		Automate auto2 = Automate.toAutomate(test1);
 		//System.out.println(auto2);
 		Moore moore = new Moore();
 		auto2 = moore.miniMoore(auto2);

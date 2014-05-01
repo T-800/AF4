@@ -245,7 +245,6 @@ public class Automate extends EnsEtat {
                 }
             }
         }
-        System.out.println("azetyh");
         for(Etat e : set.values()){
             this.ajouteEtatSeul(e);
         }
@@ -329,5 +328,25 @@ public class Automate extends EnsEtat {
 		System.out.println(result2);
 		return result1.matches(result2);
 	}
+
+    public static Automate toAutomate(Arbre arbre){
+        int i = 0;
+        HashMap<Feuille, Etat> map = new HashMap<Feuille, Etat>();
+        Automate auromate = new Automate();
+        Etat init = new Etat(true,arbre.contientMotVide,i++);
+        for(Feuille f :arbre.succ().keySet()){
+            map.put(f,new Etat(false,arbre.derniers.contains(f),i++));
+        }
+        for(Feuille f :arbre.premiers){
+            init.ajouteTransition(f.symbole,map.get(f));
+        }
+        for(Feuille f:arbre.succ().keySet()){
+            for(Feuille f2:arbre.succ().get(f)){
+                map.get(f).ajouteTransition(f2.symbole,map.get(f2));
+            }
+        }
+        auromate.ajouteEtatRecursif(init);
+        return auromate;
+    }
     
 }

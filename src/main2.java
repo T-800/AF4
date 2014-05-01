@@ -66,7 +66,7 @@ public class main2 {
                     System.out.print("Entrer une expression régulière : ");
                     //String pos = sc.next();
                     //Menu_Regex(pos);
-                    Menu_Regex("baa.*.ba..bb.*.b.");
+                    Menu_Regex("abab.+*.b*abb.+.+");
                     break;
                 case 0:
                     System.exit(0);
@@ -180,7 +180,7 @@ public class main2 {
                     System.out.println("|  GLUSHKOV  |");
                     System.out.println("~~~~~~~~~~~~~~");
 
-                    automate = a.toAutomate();
+                    automate = Automate.toAutomate(a);
                     auto = true;
                     main = 0;
                     break;

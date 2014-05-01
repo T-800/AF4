@@ -15,7 +15,7 @@ class Binaire extends Arbre{
         this.gauche = gauche;
         this.droit = droit;
         this.symbole = s;
-        this.contientMotVide = ((this.gauche.contientMotVide||this.droit.contientMotVide||this.droit.contient1||this.gauche.contient1)&&s=='+') || (((this.gauche.contientMotVide||this.gauche.contient1)&&(this.droit.contientMotVide||this.droit.contient1))&&s=='.');
+        this.contientMotVide = ((this.gauche.contientMotVide||this.droit.contientMotVide||this.droit.epsilon ||this.gauche.epsilon)&&s=='+') || (((this.gauche.contientMotVide||this.gauche.epsilon)&&(this.droit.contientMotVide||this.droit.epsilon))&&s=='.');
         if(s=='+'){
         	this.premiers.addAll(this.gauche.premiers);
         	this.premiers.addAll(this.droit.premiers);
@@ -44,17 +44,17 @@ class Binaire extends Arbre{
 	 }
 
 	@Override
-	Arbre residuel(char c,Arbre language) {
+	Arbre residuel(char c) {
 		Arbre arbre = new Feuille('0');
 		if(this.symbole=='.'){
-			Arbre arbre1 = new Binaire(gauche.residuel(c,language),droit,'.');
-			if(gauche.contientMotVide||gauche.contient1){
-				arbre1= new Binaire(arbre1.simplification(language),droit.residuel(c,language),'+');
+			Arbre arbre1 = new Binaire(gauche.residuel(c),droit,'.');
+			if(gauche.contientMotVide||gauche.epsilon){
+				arbre1= new Binaire(arbre1.simplification(),droit.residuel(c),'+');
 			}
-			return arbre1.simplification(language);
+			return arbre1.simplification();
 		}
 		else if(this.symbole=='+'){
-			return new Binaire(gauche.residuel(c,language),droit.residuel(c,language),'+').simplification(language);
+			return new Binaire(gauche.residuel(c),droit.residuel(c),'+').simplification();
 		}
 		return arbre;
 	}
@@ -73,49 +73,39 @@ class Binaire extends Arbre{
 	}
 
 	@Override
-	Arbre simplification(Arbre language) {
+	Arbre simplification() {
 		if(this.symbole=='+'){
 			if(gauche.symbole == '0' && droit.symbole == '0') return new Feuille('0');
-			else if(gauche.symbole == '0')return droit.simplification(language);
-			else if(droit.symbole == '0')return gauche.simplification(language);
-			else if(gauche.symbole == '1'){
-				droit.contient1=true;
-				return droit.simplification(language);
+			else if(gauche.symbole == '0')return droit.simplification(); // si gauche est vide on revoi juste la simplification de droit
+			else if(droit.symbole == '0')return gauche.simplification(); // si droit est vide on revoi juste la simplification de gauche
+			else if(gauche.symbole == 'Ɛ'){
+				droit.epsilon =true;
+				return droit.simplification();
 			}
-			else if(droit.symbole == '1'){
-				gauche.contient1=true;
-				return gauche.simplification(language);
+			else if(droit.symbole == 'Ɛ'){
+				gauche.epsilon =true;
+				return gauche.simplification();
 			}
 			for(String S:gauche.contientArbre()){
-				if(droit.toString().matches(S))return gauche.simplification(language);
+				if(droit.toString().matches(S))return gauche.simplification();
 			}
 			for(String S:droit.contientArbre()){
-				if(gauche.toString().matches(S))return droit.simplification(language);
+				if(gauche.toString().matches(S))return droit.simplification();
 			}
 		}
 		else if(this.symbole=='.'){
 			if(gauche.symbole == '0' || droit.symbole == '0')return new Feuille('0');
-			else if(gauche.symbole == '1') return droit.simplification(language);
-			else if(droit.symbole == '1') return gauche.simplification(language);
-			else if(gauche.contient1){
-				gauche.contient1=false;
-                if(!gauche.contientMotVide)return new Binaire(this,droit,'+').simplification(language);
+			else if(gauche.symbole == 'Ɛ') return droit.simplification();
+			else if(droit.symbole == 'Ɛ') return gauche.simplification();
+			else if(gauche.epsilon){
+				gauche.epsilon =false;
+                if(!gauche.contientMotVide)return new Binaire(this,droit,'+').simplification();
 			}
-			else if(droit.contient1){
-				droit.contient1=false;
-                if(!droit.contientMotVide)return new Binaire(this,gauche,'+').simplification(language);
-			}
-		}
-		if(language != null){
-			if(this.symbole == '+'){
-				if(this.gauche.toString().equals(language.toString()))return gauche;
-				if(this.droit.toString().equals(language.toString()))return droit;
-			}
-			else if(this.symbole == '.'){
-				if(this.droit.toString().equals(language.toString())&&this.gauche.contientMotVide)return droit;
+			else if(droit.epsilon){
+				droit.epsilon =false;
+                if(!droit.contientMotVide)return new Binaire(this,gauche,'+').simplification();
 			}
 		}
-		
 		return this;
 	}
 	
