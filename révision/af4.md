@@ -13,7 +13,7 @@ Les états **finaux** sont les états qui un numéro d'un état final de l'autom
 | 2 | 2 | 2,**3**|
 | **3** | **/** | **/** |
 
-![alt text](/media/data/git/AF4/révision/img1.JPG "Determinisation") ![alt text](/media/data/git/AF4/révision/img4.JPG "Determinisation")
+![alt text](./img1.JPG "Determinisation") ![alt text](./img4.JPG "Determinisation")
 
 ### Automate Fini Complet Deterministe
 ### Complémentaire
@@ -21,8 +21,8 @@ Les états **finaux** sont les états qui un numéro d'un état final de l'autom
 ### Union
 ### Inter
 ### Moore
-![alt text](/media/data/git/AF4/révision/img5.JPG "Determinisation")
-![alt text](/media/data/git/AF4/révision/img6.JPG "Determinisation")
+![alt text](./img5.JPG "Determinisation")
+![alt text](./img6.JPG "Determinisation")
 ### Mc Naughton et Yamada
 #### Contruire une expression rationnelle à partir d'un automate
 
@@ -40,7 +40,7 @@ Les états **finaux** sont les états qui un numéro d'un état final de l'autom
 
 **Lautomate doit être deterministe**
 
-![alt text](/media/data/git/AF4/révision/img2.JPG "Arden")
+![alt text](./img2.JPG "Arden")
 
 `L0 = a.L0 + a.L1 + ε`  
 `L1 = b.L1 + b.L2`  
@@ -93,7 +93,7 @@ Il nous reste donc :
 |**-**|`(bbaba–¹)L =`|`Ø`|  
 |4|`(bbabb–¹)L = (bba–¹)L =`|`(b.b)*.b`|
 
-![alt text](/media/data/git/AF4/révision/img3.JPG "Determinisation")
+![alt text](./img3.JPG "Determinisation")
 
 ### Thomson
 ### Glushkov
