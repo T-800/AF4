@@ -17,16 +17,24 @@ Les états **finaux** sont les états qui ont **au moins un** numéro d'un état
 
 ### 2) Automate Fini Complet Deterministe
 Pour tansformer un AFD en un AFCD il faut ajouter un état "Poubelle" vers qui toutes les transitions manquante des autres états vont pointer
-#Image
+
+![alt text](./img14.JPG "Determinisation")
 
 ### 3) Complémentaire
 **L'automate doit être complet.**
 Tout les états finaux deviennent non-finaux et invrsement.
-#Image
+
+![alt text](./img15.JPG "Determinisation")
 
 ### 4) Mirroir
+inverse transitions
+initiaux -> terminaux
+terminaux -> initiaux
 ### 5) Union
 ### 6) Inter
+
+
+
 ### 7) Moore
 #### Minimisation d'un Automate
 ![alt text](./img5.JPG "Moore")
@@ -40,7 +48,6 @@ Tout les états finaux deviennent non-finaux et invrsement.
 |:--:|:--:|:--:|:--|:--:|:--:|:--|:--:|
 | T | 1 0 | 1 0 | 0 1 | **2** 1 | **2** 1 | 1 **2** | 1 **2** |
 
-
 | Groupe | 0 | 0 | 3 | 2 | 2 | 1 | 1 |
 |:--:|:--:|:--:|:--|:--:|:--:|:--|:--:|
 | T | 1 0 | 1 0 | 0 1 | **3** 1 | 2 1 | 1 2 | 1 2 |
@@ -51,20 +58,25 @@ Tout les états finaux deviennent non-finaux et invrsement.
 ![alt text](./img6.JPG "Moore")
 ### 8) Mc Naughton et Yamada
 #### Contruire une expression rationnelle à partir d'un automate
-![alt text](./img8.JPG "Arden")
+![alt text](./img8.JPG "Arden")  **Règle de suppresion d'un état**
+
+##### Soit `A` l'automate suivant:
+![alt text](./img9.JPG "Arden")
 * On ajoute a l'automate un état `I` initial auquel on ajoute des epsilon transition vers les états initiaux
   et un état `F` Final ver qui vont pointer tout les états finaux avec des épsilon transitions
 
-  ![alt text](./img9.JPG "Arden")![alt text](./img10.JPG "Arden")
-
+  ![alt text](./img10.JPG "Arden")
+* Suppression de l'état `2`  
   ![alt text](./img11.JPG "Arden")
+* Suppression de l'état `0`  
   ![alt text](./img12.JPG "Arden")
+* Suppression de l'état `1`  
   ![alt text](./img13.JPG "Arden")
 
 ### 9) Équation linéaire droite
 #### Contruire une expression rationnelle à partir d'un automate
 
-#### 10) Lemme d'Arden
+#### Lemme d'Arden
 
 _`L = X.L+Y   =>    L = X*.Y`_
 ==
@@ -103,7 +115,7 @@ Il nous reste donc :
 
 `L0 = (a.+ a.b*.b.a*.a.b*.b)*`  => (Arden)
 
-### 11) Résiduel
+### 10) Résiduel
 
 `L = b.(a.a)*.b.a.(b.b)*.b`
 
@@ -126,10 +138,10 @@ Il nous reste donc :
 
 ![alt text](./img3.JPG "residuel")
 
-### 12) Thomson
+### 11) Thomson
 
 
-### 13) Glushkov
+### 12) Glushkov
 #### Contruire un AF à partir d'une éxpression rationnelle
 
 ex :
@@ -155,8 +167,26 @@ ex :
 
 #IMAGE3
 
-### 14) Lemme d'Itération
+### 13) Lemme d'Itération
+Soit ![alt text](./CodeCogsEqn.png "residuel")
 
+Supposons par l'absurde `L` reconnaissable c'est-à-dire Il existe Un automate `A` tel que `L(A) =   L`.
+Appelons n0 le nombre d'états de `A`
+Considerons le mot ![alt text](./eq2.png "residuel") appartient a `L`
+Comme `A` a `n0` états, avant de finir la lecture de `n0` premiers `a` dans `w` on est sure d'avoir visité un état deux fois.
+Cela signifie qu'on peut decomposer w en ![alt text](./eq3.png "residuel")
+
+
+
+### 14) Monoïde de transition
+
+| ε | a = aaa | b = aab | aa | bb = bbb = abb = baa | ab | ba = baa = aba | bab
+|:--:|:--:|:--:|:--|:--:|:--:|:--|:--:|
+| 0 | 1 | 2 | 2 | 2 | 0 | 1 | 0 |
+| 1 | 2 | 0 | 1 | 2 | 2 | 1 | 0 |
+| 2 | 1 | 2 | 2 | 2 | 0 | 1 | 0 |
+
+Soit ![alt text](./eq4.png "residuel")
 
 ### 15) Critère de cloture
 
