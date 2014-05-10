@@ -1,9 +1,9 @@
 #AF4
 
-### Determinisation :
+### 1) Determinisation :
 L'état **Initial** est un état qui possède tous les numéros des états initiaux de l'automate
 
-Les états **finaux** sont les états qui un numéro d'un état final de l'automate
+Les états **finaux** sont les états qui ont **au moins un** numéro d'un état final de l'automate
 
 
 | Etat | a | b |
@@ -15,28 +15,59 @@ Les états **finaux** sont les états qui un numéro d'un état final de l'autom
 
 ![alt text](./img1.JPG "Determinisation") ![alt text](./img4.JPG "Determinisation")
 
-### Automate Fini Complet Deterministe
-### Complémentaire
-### Mirroir
-### Union
-### Inter
-### Moore
-![alt text](./img5.JPG "Determinisation")
-![alt text](./img6.JPG "Determinisation")
-### Mc Naughton et Yamada
-#### Contruire une expression rationnelle à partir d'un automate
+### 2) Automate Fini Complet Deterministe
+Pour tansformer un AFD en un AFCD il faut ajouter un état "Poubelle" vers qui toutes les transitions manquante des autres états vont pointer
+#Image
 
+### 3) Complémentaire
+**L'automate doit être complet.**
+Tout les états finaux deviennent non-finaux et invrsement.
+#Image
+
+### 4) Mirroir
+### 5) Union
+### 6) Inter
+### 7) Moore
+#### Minimisation d'un Automate
+![alt text](./img5.JPG "Moore")
+
+| Etat | 1 | 2 | 3 | 4 | 5 | 6 | 7 |
+|:--|:--:|:--:|
+| Groupe | 0 | 0 | 0 | 0 | 0 | 1 | 1 |
+| T | 1 0 | 1 0 | 0 1 | 0 1 | 0 1 | 1 0 | 1 0 |
+
+| Groupe | 0 | 0 | 2 | 2 | 2 | 1 | 1 |
+|:--|:--:|:--:|
+| T | 1 0 | 1 0 | 0 1 | **2** 1 | **2** 1 | 1 **2** | 1 **2** |
+
+
+| Groupe | 0 | 0 | 3 | 2 | 2 | 1 | 1 |
+|:--|:--:|:--:|
+| T | 1 0 | 1 0 | 0 1 | **3** 1 | 2 1 | 1 2 | 1 2 |
+
+| Groupe | 0 | 0 | 3 | 2 | 4 | 1 | 1 |
+|:--|:--:|:--:|
+| T | 1 0 | 1 0 | 0 1 | 3 1 | 2 1 | 1 **4** | 1 **4** |
+![alt text](./img6.JPG "Moore")
+### 8) Mc Naughton et Yamada
+#### Contruire une expression rationnelle à partir d'un automate
+![alt text](./img8.JPG "Arden")
 * On ajoute a l'automate un état `I` initial auquel on ajoute des epsilon transition vers les états initiaux
   et un état `F` Final ver qui vont pointer tout les états finaux avec des épsilon transitions
 
-  # IMAGE 4
+  ![alt text](./img9.JPG "Arden")![alt text](./img10.JPG "Arden")
 
-### Équation linéaire droite
+  ![alt text](./img11.JPG "Arden")
+  ![alt text](./img12.JPG "Arden")
+  ![alt text](./img13.JPG "Arden")
+
+### 9) Équation linéaire droite
 #### Contruire une expression rationnelle à partir d'un automate
 
-#### Lemme d'Arden
+#### 10) Lemme d'Arden
 
-`L = X.L+Y   =>    L = X*.Y`
+_`L = X.L+Y   =>    L = X*.Y`_
+==
 
 **Lautomate doit être deterministe**
 
@@ -72,7 +103,7 @@ Il nous reste donc :
 
 `L0 = (a.+ a.b*.b.a*.a.b*.b)*`  => (Arden)
 
-### Résiduel
+### 11) Résiduel
 
 `L = b.(a.a)*.b.a.(b.b)*.b`
 
@@ -93,10 +124,12 @@ Il nous reste donc :
 |**-**|`(bbaba–¹)L =`|`Ø`|  
 |4|`(bbabb–¹)L = (bba–¹)L =`|`(b.b)*.b`|
 
-![alt text](./img3.JPG "Determinisation")
+![alt text](./img3.JPG "residuel")
 
-### Thomson
-### Glushkov
+### 12) Thomson
+
+
+### 13) Glushkov
 #### Contruire un AF à partir d'une éxpression rationnelle
 
 ex :
@@ -122,6 +155,9 @@ ex :
 
 #IMAGE3
 
-### Lemme D'itération
-### Critère de cloture
-### égalité de deux expressions rationnells
+### 14) Lemme d'Itération
+
+
+### 15) Critère de cloture
+
+### 16) Égalité de deux expressions rationnelles
