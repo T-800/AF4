@@ -116,7 +116,6 @@ et un état 'F' Final vers qui vont pointer tous les états finaux avec des éps
 #### Lemme d'Arden
 
 _'L = X.L+Y => L = X*.Y'_
-
 ==
 
 **Lautomate doit être déterministe**
@@ -227,9 +226,7 @@ ex :
 
 Soit ![alt text](/media/data/git/AF4/revision/eq4.png "residuel")
 
-## 14) Critère de cloture
-
-## 15) Égalité de deux expressions rationnelles
+## 14) Égalité de deux expressions rationnelles
 2 methodes:
 
 * Réduire les expressions rationnelles.
