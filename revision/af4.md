@@ -31,8 +31,11 @@ Tout les états finaux deviennent non-finaux et invrsement.
 + États Initiaux **=>** Terminaux
 + États Terminaux **=>** Initiaux
 
-## 5) Union
-On parcourt
+## 5) Union et Inter
+
+![alt text](/media/data/git/AF4/revision/img17.png "Determinisation")  ![alt text](/media/data/git/AF4/revision/img18.png "Determinisation")
+
+* Union
 
 ||I| | II| |
 | :--:  | :---: |
@@ -42,9 +45,9 @@ On parcourt
 | **3** | **2 I**   | **1 II**  | **2 I** | **1 II**  |
 
 
+![alt text](/media/data/git/AF4/revision/img20.JPG "Determinisation")
 
-## 6) Inter
-
+* Inter
 
 ||I| | II| |
 | :--:  | :---: |
@@ -53,7 +56,7 @@ On parcourt
 | **2** | 1 I   | **3 II**  | 1 I | **3 II**  |
 | **3** | **2 I**   | 1 II  | **2 I** | 1 II  |
 
-
+![alt text](/media/data/git/AF4/revision/img19.JPG "Determinisation")
 
 ## 7) Moore
 #### Minimisation d'un Automate
@@ -83,7 +86,7 @@ On parcourt
 ##### Soit `A` l'automate suivant:
 ![alt text](/media/data/git/AF4/revision/img9.JPG "Arden")
 * On ajoute a l'automate un état `I` initial auquel on ajoute des epsilon transition vers les états initiaux
-  et un état `F` Final ver qui vont pointer tout les états finaux avec des épsilon transitions
+  et un état `F` Final vers qui vont pointer tout les états finaux avec des épsilon transitions
 
 ![alt text](/media/data/git/AF4/revision/img10.JPG "Arden")
 
