@@ -116,6 +116,7 @@ et un état 'F' Final vers qui vont pointer tous les états finaux avec des éps
 #### Lemme d'Arden
 
 _'L = X.L+Y => L = X*.Y'_
+
 ==
 
 **Lautomate doit être déterministe**
@@ -215,6 +216,8 @@ ex :
 
 
 ## 13) Monoïde de transition
+
+![alt text](/media/data/git/AF4/revision/img21.png "residuel")*
 
 | ε | a = aaa | b = aab | aa | bb = bbb = abb = baa | ab | ba = baa = aba | bab
 |:--:|:--:|:--:|:--|:--:|:--:|:--|:--:|
