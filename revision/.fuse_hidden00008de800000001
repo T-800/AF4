@@ -116,52 +116,56 @@ et un état 'F' Final vers qui vont pointer tous les états finaux avec des éps
 #### Lemme d'Arden
 
 _'L = X.L+Y => L = X*.Y'_
+
 ==
 
 **Lautomate doit être déterministe**
 
 ![alt text](/media/data/git/AF4/revision/img2.JPG "Arden")
 
-        L0 = a.L0 + a.L1 + ε
-        L1 = b.L1 + b.L2
-        L2 = a.L2 + a.L3
-        L3 = b.L3 + b.L0
+L0 = a.L0 + a.L1 + ε
+
+L1 = b.L1 + b.L2
+
+L2 = a.L2 + a.L3
+
+L3 = b.L3 + b.L0
 
 **On ne cherche que les états initiaux. S'il y a plusieurs états initiaux on fera l'union**
 
-    L3 = b*.(b.L0)' Lemme d'Arden
+L3 = b*.(b.L0)' Lemme d'Arden
 
 On remplace 'L3' dans 'L2':
 
-    L2 = a.L2 + a.b*.(b.L0)
+L2 = a.L2 + a.b*.(b.L0)
 
 Il nous reste donc :
 
-    L0 = a.L0 + a.L1 + ε
-    L1 = b.L1 + b.L2
-    L2 = a.L2 + a.b*.(b.L0)
+L0 = a.L0 + a.L1 + ε
+
+L1 = b.L1 + b.L2
+
+L2 = a.L2 + a.b*.(b.L0)
 
 On applique le Lemme d'Arden sur 'L2'
 
-    L2 = a*.a.b*.b.L0 => (Arden)
+L2 = a*.a.b*.b.L0 => (Arden)
 
 On remplace 'L2' dans 'L1'
 
-    L0 = a.L0 + a.L1 + ε
-    L1 = b.L1 + b.a*.a.b*.b.L0
+L0 = a.L0 + a.L1 + ε
+
+L1 = b.L1 + b.a*.a.b*.b.L0
 
 On applique le Lemme d'Arden sur 'L1'
 
-    L1 = b*.b.a*.a.b*.b.L0 => (Arden)
-    L0 = a.L0 + a.b*.b.a*.a.b*.b.L0 + ε
+L1 = b*.b.a*.a.b*.b.L0 => (Arden)
 
-    L0 = (a.+ a.b*.b.a*.a.b*.b).L0 + ε
+L0 = a.L0 + a.b*.b.a*.a.b*.b.L0 + ε
 
-    L0 = (a.+ a.b*.b.a*.a.b*.b)* => (Arden)
+L0 = (a.+ a.b*.b.a*.a.b*.b).L0 + ε
 
-
-
-
+L0 = (a.+ a.b*.b.a*.a.b*.b)* => (Arden)
 ## 10) Résiduel
 
 `L = b.(a.a)*.b.a.(b.b)*.b`
